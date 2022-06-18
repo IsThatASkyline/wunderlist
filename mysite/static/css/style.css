@@ -1,0 +1,233 @@
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+}
+.col {
+    background: url(truebg.jpg) 100% 100% no-repeat;
+    padding: 0rem;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    -khtml-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.card-body {
+
+    color: #333333;
+    font-weight: 600;
+    margin-top: 0.4rem;
+    background: white;
+    border-bottom: 1.5px solid #999999 !important;
+    padding: 0.8rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.form-check .form-check-input {
+    margin-right: 0.8rem;
+}
+
+.container {
+    height: 94%;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+.container-fluid {
+    height: 94%;
+    max-width: 100%;
+    padding-right: 0rem;
+    padding-left: 0rem;
+}
+.col-md-3 {
+    background: #f3f2f1;
+    padding-right: 0;
+    padding-left: 0rem;
+    width: 15%;
+}
+.list-group-item {
+    background: #f3f2f1;
+    border: None;
+    padding-left: 2rem;
+}
+.badge{
+    position: absolute;
+    right: 5%;
+    top: 25%;
+}
+.row {
+    height: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0rem;
+    padding-right: 0rem;
+}
+.navbar{
+    height: 6%;
+}
+
+.navbar-brand {
+    padding-left: 1.5rem;
+}
+.navbar-text {
+    padding-right: 1.5rem;
+}
+.form-check-label {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+div.text:hover {
+    color: #333333;
+}
+a{
+    color: #333333;
+    text-decoration: None;
+}
+.rightbar {
+    background: white;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    width: 10rem;
+    border: 1px solid #cccccc;
+}
+.col-md-9 {
+    padding-left: 0rem;
+    padding-bottom: 0rem;
+    padding-right: 0rem;
+}
+
+.no-border {
+    box-shadow: none !important; /* You may want to include this as bootstrap applies these styles too */
+}
+.form-check{
+    padding-left: 1.8rem;
+}
+.form-control {
+    padding: 0.9rem 0.75rem;
+    background: rgba(0, 0, 0, 0.3) !important;
+    font-weight: 600;
+    border: 0;
+    color: white !important;
+    border-radius: 0.5rem;
+}
+
+.checked {
+    border-color: #cccccc;
+}
+
+.control-group{
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-right: 1rem;
+}
+
+.mb-3 {
+    width: 100%;
+}
+
+#id_title::placeholder{
+    opacity: 0.6 !important;
+    color:white !important;
+}
+
+.create-category{
+    width: 15rem;
+    height: 2.5rem;
+    background: #f3f2f1;
+    border: 0;
+    padding-left: 0.5rem;
+}
+#create_category::placeholder{
+   color: #2564cf;
+   font-weight: 500;
+}
+#create_category:focus::placeholder{
+   color: #797775;
+   font-weight: 500;
+}
+
+input{
+    outline:none;
+}
+
+#update-title {
+    width:70%;
+    border: 0;
+    margin-top: 0.4rem;
+    height:2rem;
+    outline:none;
+}
+#update-title::placeholder{
+    color: black;
+}
+#update-title:focus::placeholder{
+    color: white;
+}
+.rounded {
+    border-radius: 0.50rem!important;
+}
+
+.active {
+    background: #d0e3f7;
+}
+
+.update-form-title {
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.update-form-content {
+    border-top: solid;
+    border-color: #b3b3b3;
+    border-width: 0.1rem;
+    padding: 1rem;
+}
+
+.detail-checkbox {
+    margin-left: 1.5rem;
+    margin-right: 0.7rem;
+    margin-top: 1rem;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    border: none
+}
+
+textarea:focus{
+    outline: none;
+}
+
+.delete_task {
+    padding: 1rem;
+    position: relative;
+    bottom: -40%;
+}
+
+.done-task{
+    opacity: 0.5;
+}
+
+.delete-category{
+    position: absolute;
+    bottom: 0;
+    right: -5px;
+
+}
+
+.category-stuff{
+    bottom: 0;
+    position: fixed;
+    width:15%;
+}

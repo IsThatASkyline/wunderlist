@@ -1,0 +1,63 @@
+<div class="container">
+
+    {% for item in categories %}
+        {% if item.pk == category_id %}
+        <a href="{{ item.get_absolute_url }}" class="list-group-item list-group-item-action active" aria-current="true">
+        {{item.title}} <span class="badge bg-primary rounded-pill">{{ item.cnt }}</span>
+        </a>
+        {% else %}
+        <a href="{{ item.get_absolute_url }}"
+           class="list-group-item list-group-item-action">
+            {{item.title}} <span class="badge bg-primary rounded-pill">{{ item.cnt }}</span>
+        </a>
+        {% endif %}
+    {% endfor %}
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="category-stuff">
+    <div class="create-category">
+        <form id="create_category" name="create_category" action="" method="post">
+            {% csrf_token %}
+            {{cat_form.title}}
+        </form>
+        <script>
+                       $('#create_category').submit(function(e) {
+                            e.preventDefault();
+
+                            console.log("СКРИПТ ДЛЯ ИНПУТ 2");
+                             $.ajax({
+                             data: $(this).serialize(),
+                              type: 'POST',
+                              url: "{% url 'create_category' %}",
+                              success: function (json) {
+                                document.getElementById("create_category").reset();
+                                $("#sidebar").append(
+                                    '<a href="/'+json.new_cat_id+'/" class="list-group-item list-group-item-action">' +
+                                            json.title + '<span class="badge bg-primary rounded-pill">0</span>' +
+                                        '</a>'
+                                )
+                                },
+
+
+                              error: function (response) {
+
+                                  alert(response.responseJSON.errors);
+                                  console.log(response.responseJSON.errors)
+                              }
+                          });
+                          return false;
+                  })
+
+     </script>
+    </div>
+    <div class="delete-category">
+        <form action="{% url 'delete_category' category_id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden"  name="first_category" value="{{ first_category }}">
+            <input type="hidden"  name="second_category" value="{{ second_category }}">
+            <button type="submit" class="btn no-border">
+                <img src="../../static/css/pomoika.jpg" width="40" height="25">
+            </button>
+        </form>
+    </div>
+</div>
