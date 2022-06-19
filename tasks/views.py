@@ -1,6 +1,6 @@
-from django.shortcuts import render,reverse, redirect, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from .forms import TasksForm, UserRegisterForm, UserLoginForm, CreateCategoryForm, UpdateTaskForm, UpdateTaskContentForm
-
+from django.contrib.auth.decorators import login_required
 from .models import Tasks, Category
 from django.views.generic import ListView
 
@@ -27,7 +27,7 @@ def register(request):
             messages.success(request, 'Registration success')
             return redirect('home')
         else:
-            messages.error(request, 'Registratiom failed')
+            messages.error(request, 'Registration failed')
     else:
         form = UserRegisterForm()
     return render(request, 'tasks/register.html', {'form': form})
@@ -67,6 +67,7 @@ def detail_task(request, category_id, pk):
 
     return render(request, 'tasks/tasks_detail.html', context=context)
 
+
 def delete_category(request, pk):
     first_category = request.POST['first_category']
     second_category = request.POST['second_category']
@@ -77,9 +78,6 @@ def delete_category(request, pk):
         return redirect('category', second_category)
 
 
-
-
-
 def update_task(request, pk):
     task = Tasks.objects.get(pk=pk)
     title = request.POST['title']
@@ -88,6 +86,7 @@ def update_task(request, pk):
     task.save()
     return JsonResponse({"title": title}, status=200)
 
+
 def update_content(request):
     pk = request.POST['task_id']
     task = Tasks.objects.get(pk=pk)
@@ -95,6 +94,7 @@ def update_content(request):
     task.content = content
     task.save()
     return redirect(request.META.get('HTTP_REFERER','redirect_if_referer_not_found'))
+
 
 class HomeTasks(ListView):
     model = Tasks
