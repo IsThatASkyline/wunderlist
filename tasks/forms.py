@@ -44,9 +44,9 @@ class CreateTaskForm(forms.ModelForm):
 class CreateCategoryForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ['title']
+        fields = ['title', 'user']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'create-category', 'placeholder': 'Add category...', 'id': 'create_category'})
+            'title': forms.TextInput(attrs={'class': 'create-category', 'placeholder': 'Add category...', 'id': 'create_category'}),
         }
 
 class UpdateTaskForm(forms.ModelForm):

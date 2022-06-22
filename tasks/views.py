@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from .forms import TasksForm, UserRegisterForm, UserLoginForm, CreateCategoryForm, UpdateTaskForm, UpdateTaskContentForm
 from django.contrib.auth.decorators import login_required
-from .models import Tasks, Category
+from .models import Tasks, Category, User
 from django.views.generic import ListView
 
 from django.contrib.auth import login, logout
@@ -17,17 +17,17 @@ def user_logout(request):
     logout(request)
     return redirect('login')
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            new_category = Category.objects.create(title='Incoming', user=User.objects.get(pk=user.id))
+            new_category.save()
+            new_task = Tasks.objects.create(title='Enjoy!', category=Category.objects.get(pk=new_category.id), user=User.objects.get(pk=user.id))
+            new_task.save()
             login(request, user)
-            messages.success(request, 'Registration success')
-            return redirect('home')
-        else:
-            messages.error(request, 'Registration failed')
+            return redirect('category', new_category.id)
     else:
         form = UserRegisterForm()
     return render(request, 'tasks/register.html', {'form': form})
@@ -69,13 +69,19 @@ def detail_task(request, category_id, pk):
 
 
 def delete_category(request, pk):
-    first_category = request.POST['first_category']
-    second_category = request.POST['second_category']
-    category = Category.objects.get(pk=pk).delete()
-    if pk != first_category:
-        return redirect('category', first_category)
+    user = request.user.id
+    cnt_cats = Category.objects.filter(user=user).count()
+    print(cnt_cats)
+    if cnt_cats <= 1:
+        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
     else:
-        return redirect('category', second_category)
+        first_category = request.POST['first_category']
+        second_category = request.POST['second_category']
+        category = Category.objects.get(pk=pk).delete()
+        if pk != first_category:
+            return redirect('category', first_category)
+        else:
+            return redirect('category', second_category)
 
 
 def update_task(request, pk):
@@ -153,7 +159,6 @@ def view_category(request, category_id):
     }
 
     return render(request, 'tasks/my_category.html', context=context)
-
 
 def create_category(request):
     if request.method == "POST" and is_ajax(request=request):

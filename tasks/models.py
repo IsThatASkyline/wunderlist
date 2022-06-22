@@ -28,6 +28,7 @@ class Tasks(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name="Название категории")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=2)
 
     def get_absolute_url(self):
         return reverse_lazy('category', kwargs={"category_id": self.id})
@@ -40,12 +41,10 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
         ordering = ['title']
 
+
 class TestTask(models.Model):
     title = models.CharField(max_length=100, verbose_name="")
 
     def __str__(self):
         return self.title
-    class Meta:
-
-        ordering = ['-id']
 
