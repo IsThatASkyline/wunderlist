@@ -48,6 +48,7 @@ def user_login(request):
 def detail_task(request, category_id, pk):
     form = TasksForm()
     user = request.user.id
+    get_object_or_404(Tasks, user=user, pk=pk)
     tasks = Tasks.objects.filter(category_id=category_id, user_id=user).select_related('category').order_by('is_done')
     update_form = UpdateTaskForm()
     target_task = Tasks.objects.get(pk=pk)
@@ -146,9 +147,11 @@ def change_checkbox(request):
 
 
 def view_category(request, category_id):
+    user = request.user.id
+    get_object_or_404(Category, user=user, pk=category_id)
     form = TasksForm()
     cat_form = CreateCategoryForm()
-    user = request.user.id
+
     tasks = Tasks.objects.filter(category_id=category_id, user_id=user).select_related('category').order_by('is_done')
     context = {
         'tasks': tasks,
