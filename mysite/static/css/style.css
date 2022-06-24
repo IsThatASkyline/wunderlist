@@ -240,8 +240,9 @@ textarea:focus{
     text-align: center;
     position: relative;
     background: #f5f5f5;
-    height: 22%;
+    height: 24%;
 }
+
 .register-head-text{
     font-family: Verdana, Helvetica, Arial, sans-serif;
     font-size: 35pt;
@@ -263,7 +264,7 @@ textarea:focus{
     text-align: center;
     position: relative;
     background: #f5f5f5;
-    height: 78%;
+    height: 76%;
 }
 
 .register-form{
@@ -340,3 +341,4 @@ p.register-text{
     margin-bottom: 2rem;
 
 }
+

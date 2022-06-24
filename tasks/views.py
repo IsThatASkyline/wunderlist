@@ -38,16 +38,18 @@ def user_login(request):
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
+            category = Category.objects.filter(user=user.id)[0].id
             login(request, user)
-            return redirect('home')
+            return redirect('category', category)
     else:
         form = UserLoginForm()
     return render(request, 'tasks/login.html', {"form": form})
 
-
+@login_required
 def detail_task(request, category_id, pk):
     form = TasksForm()
     user = request.user.id
+    username = request.user.username
     get_object_or_404(Tasks, user=user, pk=pk)
     tasks = Tasks.objects.filter(category_id=category_id, user_id=user).select_related('category').order_by('is_done')
     update_form = UpdateTaskForm()
@@ -64,36 +66,36 @@ def detail_task(request, category_id, pk):
         'user': user,
         'pk': pk,
         'target_task': target_task,
+        'username': username
     }
 
     return render(request, 'tasks/tasks_detail.html', context=context)
 
-
+@login_required
 def delete_category(request, pk):
     user = request.user.id
     cnt_cats = Category.objects.filter(user=user).count()
-    print(cnt_cats)
+    categories = Category.objects.filter(user=user)
     if cnt_cats <= 1:
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
     else:
-        first_category = request.POST['first_category']
-        second_category = request.POST['second_category']
-        category = Category.objects.get(pk=pk).delete()
+        first_category = categories[0].pk
+        second_category = categories[1].pk
+        Category.objects.get(pk=pk).delete()
         if pk != first_category:
             return redirect('category', first_category)
         else:
             return redirect('category', second_category)
 
-
+@login_required
 def update_task(request, pk):
     task = Tasks.objects.get(pk=pk)
     title = request.POST['title']
     task.title = title
-    # task.content = request['content']
     task.save()
     return JsonResponse({"title": title}, status=200)
 
-
+@login_required
 def update_content(request):
     pk = request.POST['task_id']
     task = Tasks.objects.get(pk=pk)
@@ -102,28 +104,30 @@ def update_content(request):
     task.save()
     return redirect(request.META.get('HTTP_REFERER','redirect_if_referer_not_found'))
 
+def home(request):
+    return render(request, 'tasks/home.html')
 
-class HomeTasks(ListView):
-    model = Tasks
-    template_name = 'tasks/home_tasks_list.html'
-    context_object_name = 'tasks'
-    extra_context = {'title': 'All Tasks'}
-    mixin_prop = 'hello world'
+# class HomeTasks(ListView):
+#     model = Tasks
+#     template_name = 'tasks/home_tasks_list.html'
+#     context_object_name = 'tasks'
+#     extra_context = {'title': 'All Tasks'}
+#     mixin_prop = 'hello world'
+#
+#     def get_queryset(self):
+#         return Tasks.objects.filter(user_id=self.request.user.id).select_related('category')
+#
+#
+# class HomeDetails(ListView):
+#     model = Tasks
+#     template_name = 'tasks/home_details.html'
+#     context_object_name = 'tasks'
+#     allow_empty = False
+#
+#     def get_queryset(self):
+#         return Tasks.objects.filter(user_id=self.request.user.id).select_related('category')
 
-    def get_queryset(self):
-        return Tasks.objects.filter(user_id=self.request.user.id).select_related('category')
-
-
-class HomeDetails(ListView):
-    model = Tasks
-    template_name = 'tasks/home_details.html'
-    context_object_name = 'tasks'
-    allow_empty = False
-
-    def get_queryset(self):
-        return Tasks.objects.filter(user_id=self.request.user.id).select_related('category')
-
-
+@login_required
 def change_checkbox(request):
     if request.method == "POST":
         if request.POST['is_done'] == 'true':
@@ -145,9 +149,10 @@ def change_checkbox(request):
     #
     return render(request, 'tasks/home_tasks_list.html')
 
-
+@login_required
 def view_category(request, category_id):
     user = request.user.id
+    username = request.user.username
     get_object_or_404(Category, user=user, pk=category_id)
     form = TasksForm()
     cat_form = CreateCategoryForm()
@@ -158,11 +163,13 @@ def view_category(request, category_id):
         'form': form,
         'category_id': category_id,
         'user': user,
+        'username': username,
         'cat_form': cat_form,
     }
 
     return render(request, 'tasks/my_category.html', context=context)
 
+@login_required
 def create_category(request):
     if request.method == "POST" and is_ajax(request=request):
         form = CreateCategoryForm(request.POST)
@@ -177,7 +184,7 @@ def create_category(request):
             errors = form.errors.as_json()
             return JsonResponse({"errors": errors}, status=400)
 
-
+@login_required
 def create_task(request, category_id):
     user = request.user.id
     if request.method == "POST" and is_ajax(request=request):
@@ -193,7 +200,7 @@ def create_task(request, category_id):
             errors = form.errors.as_json()
             return JsonResponse({"errors": errors}, status=400)
 
-
+@login_required
 def delete_task(request, pk):
     Tasks.objects.filter(pk=pk).delete()
     category_id = request.POST['category_id']
