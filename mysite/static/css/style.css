@@ -1,21 +1,22 @@
 html{
     height: 100%;
+
 }
 body{
     height: 100%;
+    min-width: 1782px;
 }
 .col {
-    background: url(truebg.jpg) 100% 100% no-repeat;
+    background: url(truebg.jpg) 100% 100%;
     padding: 0rem;
-    height: 100%;
     position: relative;
-    width: 100%;
     -khtml-background-size: cover;
     -moz-background-size: cover;
     -ms-background-size: cover;
     -o-background-size: cover;
     -webkit-background-size: cover;
     background-size: cover;
+    min-width: 200px;
 }
 .card-body {
 
@@ -41,8 +42,8 @@ body{
     margin-left: 0;
 }
 .container-fluid {
-    height: 94%;
-    max-width: 100%;
+    height: 93%;
+    min-width: 1360px;
     padding-right: 0rem;
     padding-left: 0rem;
 }
@@ -50,7 +51,8 @@ body{
     background: #f3f2f1;
     padding-right: 0;
     padding-left: 0rem;
-    width: 15%;
+    max-width: 260px;
+
 }
 .list-group-item {
     background: #f3f2f1;
@@ -68,9 +70,12 @@ body{
     margin-left: 0;
     padding-left: 0rem;
     padding-right: 0rem;
+    min-height: 600px;
 }
 .navbar{
-    height: 6%;
+    height: 7%;
+    min-width: 1360px;
+    min-height: 67px;
 }
 
 .navbar-brand {
@@ -92,17 +97,30 @@ a{
     color: #333333;
     text-decoration: None;
 }
+
+#sidebar{
+    height:100%;
+    position: relative;
+}
+
 .rightbar {
+    position: relative;
     background: white;
     margin-top: 1rem;
-    margin-right: 1rem;
-    width: 10rem;
+    margin-left: 1rem;
+    height: 90%;
+    min-width: 360px;
     border: 1px solid #cccccc;
+    display: inline-block;
 }
 .col-md-9 {
     padding-left: 0rem;
     padding-bottom: 0rem;
     padding-right: 0rem;
+    min-width: 715px;
+    max-width: 1300px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .no-border {
@@ -194,6 +212,10 @@ input{
     padding: 1rem;
 }
 
+.update-content{
+    position: relative;
+}
+
 .detail-checkbox {
     margin-left: 1.5rem;
     margin-right: 0.7rem;
@@ -211,9 +233,10 @@ textarea:focus{
 }
 
 .delete_task {
+    position: absolute;
     padding: 1rem;
-    position: relative;
-    bottom: -40%;
+    bottom: 0;
+    width: 100%;
 }
 
 .done-task{
@@ -223,13 +246,13 @@ textarea:focus{
 .delete-category{
     position: absolute;
     bottom: 0;
-    right: -5px;
+    right: 0;
 }
 
 .category-stuff{
     bottom: 0;
-    position: fixed;
-    width:15%;
+    position: absolute;
+    width: 260px;
 }
 
 .register-img{
@@ -241,6 +264,7 @@ textarea:focus{
     position: relative;
     background: #f5f5f5;
     height: 24%;
+    min-height: 220px;
 }
 
 .register-head-text{
@@ -264,6 +288,7 @@ textarea:focus{
     text-align: center;
     position: relative;
     background: #f5f5f5;
+    min-height: 700px;
     height: 76%;
 }
 

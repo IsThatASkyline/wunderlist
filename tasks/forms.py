@@ -47,6 +47,7 @@ class CreateCategoryForm(forms.ModelForm):
         fields = ['title', 'user']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'create-category', 'placeholder': 'Add category...', 'id': 'create_category'}),
+
         }
 
 class UpdateTaskForm(forms.ModelForm):
@@ -59,7 +60,7 @@ class UpdateTaskForm(forms.ModelForm):
 
 
 class UpdateTaskContentForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={'maxlength':'300' ,'cols': 25}), label = '')
+    content = forms.CharField(widget=forms.Textarea(attrs={'maxlength':'200', 'cols': 20}), label = '')
     class Meta:
         model = Tasks
         fields = ['content']

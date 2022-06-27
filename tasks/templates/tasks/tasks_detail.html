@@ -14,8 +14,7 @@
 
 {% block content %}
 
-<div class="container-fluid ">
-    <div class="row">
+
     <div class="col-md-9">
        <form id="myForm" action="" method="post">
     {% csrf_token %}
@@ -123,7 +122,7 @@
 <div id="done">
 </div>
 </div>
-<div class="col rightbar rounded">
+    <div class="rightbar rounded">
             <form id="updateForm" action="" method="post">
             {% csrf_token %}
             <div class="update-form-title no-border">
@@ -159,17 +158,18 @@
                       return false;
               })
     </script>
-    <form action="{% url 'update_content' %}" method="post">
-        {% csrf_token %}
-    <div class="update-form-content">
-                {{ update_content_form.as_p }}
-                <input type="hidden" name="task_id" value="{{ target_task.id }}">
-                <input type="hidden"  name="category_id" value="{{ category_id }}">
-                <input type="hidden"  name="user" value="{{ user }}">
-                <button type="submit" class="btn btn-primary mb-3">Confirm</button>
-            </div>
-    </form>
-
+    <div class="update-content">
+        <form action="{% url 'update_content' %}" method="post">
+            {% csrf_token %}
+        <div class="update-form-content">
+                    {{ update_content_form.as_p }}
+                    <input type="hidden" name="task_id" value="{{ target_task.id }}">
+                    <input type="hidden"  name="category_id" value="{{ category_id }}">
+                    <input type="hidden"  name="user" value="{{ user }}">
+                    <button type="submit" class="btn btn-primary mb-3">Confirm</button>
+                </div>
+        </form>
+    </div>
     <div class="delete_task">
     <form action="{% url 'delete_task' target_task.pk %}" method="post">
         {% csrf_token %}
@@ -177,7 +177,6 @@
         <button type="submit" class="btn btn-danger mb-3">DELETE</button>
     </form>
     </div>
-</div>
     <script>
     $(function() {
     window.addEventListener('load', function () {
@@ -271,7 +270,6 @@
     });
        </script>
 
-
+</div>
+    </div>
 {% endblock %}
-
-

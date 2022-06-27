@@ -19,7 +19,7 @@
         <form id="create_category" name="create_category" action="" method="post">
             {% csrf_token %}
             {{cat_form.title}}
-            {{cat_form.user}}
+            <input type="hidden"  name="user" value="{{ user_id }}">
         </form>
         <script>
                        $('#create_category').submit(function(e) {

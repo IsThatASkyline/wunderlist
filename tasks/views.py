@@ -126,8 +126,8 @@ def detail_task(request, category_id, pk):
     username = request.user.username
     get_object_or_404(Tasks, user=user, pk=pk)
     tasks = Tasks.objects.filter(category_id=category_id, user_id=user).select_related('category').order_by('is_done')
-    update_form = UpdateTaskForm()
     target_task = Tasks.objects.get(pk=pk)
+    update_form = UpdateTaskForm()
     update_content_form = UpdateTaskContentForm(initial={'content': target_task.content})
 
 
