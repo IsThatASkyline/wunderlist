@@ -1,2 +1,2 @@
 # wunderlist
-visit wunderlistapp.herokuapp.com
+visit https://wunderlistapp.herokuapp.com
