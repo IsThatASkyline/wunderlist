@@ -41,6 +41,8 @@
           <div class="register-to-login">
         Don't have an account yet? <a class="register-to-login" href="{% url 'register' %}">Sign up </a>
     </div>
+        {{ form.username.errors }}
+        {{ form.password.errors }}
     </div>
     <div class="register-info col-md-4">
         <div class="register-info-img">
