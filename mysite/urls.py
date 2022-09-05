@@ -20,6 +20,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tasks.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/', include('wunderapi.urls')),
 ]
 
 if settings.DEBUG:

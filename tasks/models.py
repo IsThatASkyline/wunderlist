@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -11,7 +11,7 @@ class Tasks(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
     is_done = models.BooleanField(default=False, verbose_name='Is done')
     category = models.ForeignKey('Category', verbose_name="Category", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, related_name="tasks", on_delete=models.CASCADE, default=1)
     content = models.TextField(max_length=300, verbose_name="Content", null=True, blank=True)
 
     def get_absolute_url(self):
@@ -39,11 +39,3 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
         ordering = ['id']
-
-
-class TestTask(models.Model):
-    title = models.CharField(max_length=100, verbose_name="")
-
-    def __str__(self):
-        return self.title
-

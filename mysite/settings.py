@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'crispy_forms',
     'tasks.apps.TasksConfig',
+    'rest_framework',
+    'wunderapi.apps.WunderapiConfig',
 ]
 
 MIDDLEWARE = [
