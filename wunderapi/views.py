@@ -4,6 +4,7 @@ from rest_framework import permissions, viewsets
 from django.contrib.auth.models import User
 from wunderapi.permissions import IsOwnerOrReadOnly
 
+from rest_framework.views import APIView
 
 class TaskViewSet(viewsets.ModelViewSet):
    """

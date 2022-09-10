@@ -166,12 +166,7 @@ input{
     height:2rem;
     outline:none;
 }
-#update-title::placeholder{
-    color: black;
-}
-#update-title:focus::placeholder{
-    color: white;
-}
+
 .rounded {
     border-radius: 0.50rem!important;
 }
