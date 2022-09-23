@@ -14,8 +14,8 @@ class UserRegisterForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control no-border'}))
-    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control no-border'}))
+    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control no-border', 'placeholder': 'Username'}))
+    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control no-border', 'placeholder': 'Password'}))
 
 
 class TasksForm(forms.ModelForm):
