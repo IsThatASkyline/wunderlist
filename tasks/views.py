@@ -133,6 +133,7 @@ def detail_task(request, category_id, pk):
 
     context = {
         'tasks': tasks,
+        'user': user,
         'form': form,
         'update_form': update_form,
         'update_content_form': update_content_form,
