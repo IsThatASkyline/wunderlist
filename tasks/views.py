@@ -137,7 +137,6 @@ def detail_task(request, category_id, pk):
         'update_form': update_form,
         'update_content_form': update_content_form,
         'category_id': category_id,
-        'user': user,
         'pk': pk,
         'target_task': target_task,
         'username': username

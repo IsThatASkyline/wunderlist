@@ -26,7 +26,6 @@
 
     <div class="form-group">
     <input type="hidden" id="category" name="category" value="{{ category_id }}">
-    <input type="hidden" id="user" name="user" value="{{ user }}">
     <input type="hidden" id="content" name="content" value=" ">
     </div>
     </form>
@@ -89,8 +88,8 @@
                 {% csrf_token %}
               <div class="form-check">
                     <input class="form-check-input checked no-border" type="checkbox" name="{{ item.pk }}"
-                           checked >
-                    {{item.title}}
+                           checked>
+                    <s>{{item.title}}</s>
               </div>
             </form>
             </div>
@@ -125,7 +124,7 @@
                         '<div class="card-body rounded text done-task">' +
                            '<div class="form-check">' +
                               '<input class="form-check-input" type="checkbox" name="'+json.new_task_id+'" checked>' +
-                               json.title +
+                               '<s>' + json.title + '</s>' +
                             '</div>' +
                         '</div>' +
                      '</a>'
