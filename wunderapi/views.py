@@ -94,6 +94,7 @@ class CategoryList(APIView):
       return Response(serializer.data)
 
    def post(self, request, *args, **kwargs):
+       request.data['user'] = request.user.id
        new_category = CategorySerializer(data=request.data)
        if new_category.is_valid():
            new_category.save()

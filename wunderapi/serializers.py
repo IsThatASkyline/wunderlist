@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
+
     category = serializers.ReadOnlyField(source='category.id')
     class Meta:
         model = Tasks
@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'tasks']
 
 class CategorySerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Category
         fields = ['id', 'title', 'user']
