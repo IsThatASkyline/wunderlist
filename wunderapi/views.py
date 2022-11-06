@@ -7,6 +7,7 @@ from rest_framework.authentication import SessionAuthentication,TokenAuthenticat
 from rest_framework.response import Response
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from rest_framework import status
 
 from rest_framework.views import APIView
 
@@ -57,6 +58,12 @@ class TaskDetail(APIView):
       task = self.get_object(pk)
       serializer = TaskSerializer(task)
       return Response(serializer.data)
+
+   def delete(self, request, pk):
+       task = self.get_object(pk)
+       cat_id = task.category_id
+       task.delete()
+       return Response(cat_id)
 
    def patch(self, request, pk):
        try:
@@ -113,11 +120,19 @@ class CategoryDetail(APIView):
    def post(self, request, pk, *args, **kwargs):
        user = request.user.id
        task_data = request.data
-       new_task = Tasks.objects.create(title=task_data['title'], category_id=pk, user_id=user, content=task_data['content'])
+       try:
+           content = task_data['content']
+       except:
+           content = None
+       new_task = Tasks.objects.create(title=task_data['title'], category_id=pk, user_id=user, content=content)
        new_task.save()
        serializer = TaskSerializer(new_task)
        return Response(serializer.data)
 
+   def delete(self, request, pk):
+       category = Category.objects.get(pk=pk)
+       category.delete()
+       return Response(status.HTTP_200_OK)
 
 
 
