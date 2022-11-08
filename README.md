@@ -35,6 +35,19 @@ https://wunderlistapp.herokuapp.com
 <img src="https://i.ibb.co/T2dnVK1/image.png" alt="image" border="0">
 
 
+## API
+
+Чтобы увидеть все категории пользователя: https://wunderlistapp.herokuapp.com/api/v1/categories/ 
+
+Посмотреть список задач в нужной категории https://wunderlistapp.herokuapp.com/api/v1/categories/{id_нужной_категории}/ 
+
+Посмотреть подробное описание задачи https://wunderlistapp.herokuapp.com/api/v1/tasks/{id_нужной_задачи}/ 
+
+##
+
+Сайт написан на Django + немного JavaScript(JQuery, ajax) + DRF для api
+
+Также к приложению написан телеграмм-бот https://t.me/wunderlist_bot
 
 
 
