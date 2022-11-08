@@ -1,5 +1,5 @@
-# wunderlist
-visit https://wunderlistapp.herokuapp.com
+# Wunderlist
+https://wunderlistapp.herokuapp.com
 
 ## To-Do приложение
 ### Авторизация
@@ -18,9 +18,21 @@ visit https://wunderlistapp.herokuapp.com
 
 Вы можете создавать категории и задачи,
 
+<img src="https://i.ibb.co/tXZWGd6/image.png" alt="image" border="0">
+
+<img src="https://i.ibb.co/b72PJDk/image.png" alt="image" border="0">
 
 А также редактировать и удалять их
 
+<img src="https://i.ibb.co/DftWtwq/image.png" alt="image" border="0">
+
+<img src="https://i.ibb.co/K2kD7gj/image.png" alt="image" border="0">
+
+### Выход из аккаунта
+
+Чтобы выйти из аккаунта, нажмите Logout в правом верхнем углу
+
+<img src="https://i.ibb.co/T2dnVK1/image.png" alt="image" border="0">
 
 
 
