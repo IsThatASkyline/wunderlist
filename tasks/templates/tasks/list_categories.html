@@ -51,6 +51,8 @@
 
      </script>
     </div>
+    {% if category_id == None %}
+    {% else %}
     <div class="delete-category">
         <form action="{% url 'delete_category' category_id %}" method="post">
             {% csrf_token %}
@@ -61,4 +63,5 @@
             </button>
         </form>
     </div>
+    {% endif %}
 </div>

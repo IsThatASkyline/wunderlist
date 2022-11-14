@@ -1,0 +1,369 @@
+html{
+    height: 100%;
+
+}
+body{
+    height: 100%;
+    min-width: 1782px;
+}
+.col {
+    background: url(truebg.jpg) 100% 100%;
+    padding: 0rem;
+    position: relative;
+    -khtml-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    min-width: 200px;
+}
+.card-body {
+
+    color: #333333;
+    font-weight: 600;
+    margin-top: 0.4rem;
+    background: white;
+    border-bottom: 1.5px solid #999999 !important;
+    padding: 0.8rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.form-check .form-check-input {
+    margin-right: 0.8rem;
+}
+
+.container {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+.container-fluid {
+    height: 93%;
+    min-width: 1360px;
+    padding-right: 0rem;
+    padding-left: 0rem;
+}
+.col-md-3 {
+    background: #f3f2f1;
+    padding-right: 0;
+    padding-left: 0rem;
+    max-width: 260px;
+
+}
+.list-group-item {
+    background: #f3f2f1;
+    border: None;
+    padding-left: 2rem;
+}
+.badge{
+    position: absolute;
+    right: 5%;
+    top: 25%;
+}
+.row {
+    height: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    min-height: 600px;
+}
+.navbar{
+    height: 7%;
+    min-width: 1360px;
+    min-height: 67px;
+}
+
+.navbar-brand {
+    padding-left: 1.5rem;
+}
+.navbar-text {
+    position: absolute;
+    right: 2rem;
+}
+.form-check-label {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+div.text:hover {
+    color: #333333;
+}
+a{
+    color: #333333;
+    text-decoration: None;
+}
+
+#sidebar{
+    height:100%;
+    position: relative;
+}
+
+.rightbar {
+    position: relative;
+    background: white;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    height: 90%;
+    min-width: 360px;
+    border: 1px solid #cccccc;
+    display: inline-block;
+}
+.col-md-9 {
+    padding-left: 0rem;
+    padding-bottom: 0rem;
+    padding-right: 0rem;
+    min-width: 715px;
+    max-width: 1300px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.no-border {
+    box-shadow: none !important; /* You may want to include this as bootstrap applies these styles too */
+}
+.form-check{
+    padding-left: 1.8rem;
+}
+.form-control {
+    padding: 0.9rem 0.75rem;
+    background: rgba(0, 0, 0, 0.3) !important;
+    font-weight: 600;
+    border: 0;
+    color: white !important;
+    border-radius: 0.5rem;
+}
+
+.checked {
+    border-color: #cccccc;
+}
+
+.control-group{
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-right: 1rem;
+}
+
+.mb-3 {
+    width: 100%;
+}
+
+#id_title::placeholder{
+    opacity: 0.6 !important;
+    color:white !important;
+}
+
+.create-category{
+    width: 15rem;
+    height: 2.5rem;
+    background: #f3f2f1;
+    border: 0;
+    padding-left: 0.5rem;
+}
+#create_category::placeholder{
+   color: #2564cf;
+   font-weight: 500;
+}
+#create_category:focus::placeholder{
+   color: #797775;
+   font-weight: 500;
+}
+
+input{
+    outline:none !important;
+}
+
+#update-title {
+    width:70%;
+    border: 0;
+    margin-top: 0.4rem;
+    height:2rem;
+    outline:none;
+}
+#update-title::placeholder{
+    color: black;
+}
+#update-title:focus::placeholder{
+    color: white;
+}
+.rounded {
+    border-radius: 0.50rem!important;
+}
+
+.active {
+    background: #d0e3f7;
+}
+
+.update-form-title {
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.update-form-content {
+    border-top: solid;
+    border-color: #b3b3b3;
+    border-width: 0.1rem;
+    padding: 1rem;
+}
+
+.update-content{
+    position: relative;
+}
+
+.detail-checkbox {
+    margin-left: 1.5rem;
+    margin-right: 0.7rem;
+    margin-top: 1rem;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    border: none;
+}
+
+textarea:focus{
+    outline: none;
+}
+
+.delete_task {
+    position: absolute;
+    padding: 1rem;
+    bottom: 0;
+    width: 100%;
+}
+
+.done-task{
+    opacity: 0.5;
+}
+
+.delete-category{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.category-stuff{
+    bottom: 0;
+    position: absolute;
+    width: 260px;
+}
+
+.register-img{
+    display: inline-block;
+}
+
+.register-head{
+    text-align: center;
+    position: relative;
+    background: #f5f5f5;
+    height: 24%;
+    min-height: 220px;
+}
+
+.register-head-text{
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size: 35pt;
+    font-weight: 800;
+    color: #666666;
+    display: inline-block;
+    bottom: -40px;
+    width:100%;
+    top:50%;
+    text-align:center;
+}
+
+.register-span{
+    font-family: MS Sans Serif;
+    font-weight: 50;
+}
+
+.register-body{
+    text-align: center;
+    position: relative;
+    background: #f5f5f5;
+    min-height: 700px;
+    height: 76%;
+}
+
+.register-form{
+    width: 25rem;
+    top: 3rem;
+    position: absolute;
+    right: 53%;
+    border-top: 1px solid #b3b3b3;
+}
+
+.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback){
+    background: white !important;
+    border-radius: 0;
+    border-right: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	color: #4d4d4d !important;
+}
+
+.input-group-text{
+    border: 0;
+    border-bottom: 1px solid #cccccc;
+    background-color: white;
+    border-radius: 0;
+    border-right: 1px solid #cccccc;
+    padding: 0.5rem;
+    border-left: 1px solid #cccccc;
+}
+
+.register-btn{
+    width: 100%;
+    margin: 0.5rem;
+    padding: 0.7rem;
+}
+
+.register-to-login{
+    margin-top: 2rem;
+    font-weight: 800;
+    color: #666666;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+a.register-to-login{
+    color: #0d6efd;
+}
+
+.register-info{
+    position: absolute;
+    right: 17%;
+    top: 3rem;
+    border-left: 1px solid #cccccc;
+    background: #f5f5f5;
+    padding-left: 0.5rem;
+}
+.register-info-text{
+    text-align: left;
+    padding-left: 8rem;
+    width: 30rem;
+}
+
+.register-info-img{
+    position: absolute;
+    padding-left: 1rem;
+}
+
+p.register-text-h{
+    font-size: 20px;
+    font-weight: 700;
+    color: #1499db;
+}
+p.register-text{
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    margin-bottom: 2rem;
+}
+
+.navbar-space{
+    padding-left: 0.5rem;
+}

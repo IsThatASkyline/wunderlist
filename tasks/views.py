@@ -39,18 +39,16 @@ def user_login(request):
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            category = Category.objects.filter(user=user.id)[0].id
             login(request, user)
-            return redirect('category', category)
+            return redirect('home')
     else:
         form = UserLoginForm()
     return render(request, 'tasks/login.html', {"form": form})
 
 @login_required
 def home(request):
-    user = request.user.id
-    category = Category.objects.filter(user=user)[0].pk
-    return redirect('category', category)
+    username = request.user.username
+    return render(request, 'tasks/home.html', context={'username': username})
 
 @login_required
 def create_category(request):
@@ -90,18 +88,9 @@ def view_category(request, category_id):
 @login_required
 def delete_category(request, pk):
     user = request.user.id
-    cnt_cats = Category.objects.filter(user=user).count()
-    categories = Category.objects.filter(user=user)
-    if cnt_cats <= 1:
-        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
-    else:
-        first_category = categories[0].pk
-        second_category = categories[1].pk
-        Category.objects.get(pk=pk).delete()
-        if pk != first_category:
-            return redirect('category', first_category)
-        else:
-            return redirect('category', second_category)
+    Category.objects.get(pk=pk).delete()
+    return redirect('home')
+
 
 @login_required
 def create_task(request, category_id):
@@ -133,11 +122,11 @@ def detail_task(request, category_id, pk):
 
     context = {
         'tasks': tasks,
+        'user': user,
         'form': form,
         'update_form': update_form,
         'update_content_form': update_content_form,
         'category_id': category_id,
-        'user': user,
         'pk': pk,
         'target_task': target_task,
         'username': username
