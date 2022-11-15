@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from .forms import TasksForm, UserRegisterForm, UserLoginForm, CreateCategoryForm, UpdateTaskForm, UpdateTaskContentForm
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from .models import Tasks, Category, User
-from django.views.generic import ListView
-
+from django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.http import JsonResponse
@@ -54,7 +54,6 @@ def home(request):
 def create_category(request):
     if request.method == "POST" and is_ajax(request=request):
         form = CreateCategoryForm(request.POST)
-        print(list(request.POST.items()))
         if form.is_valid():
             form.save()
             title = form.cleaned_data['title']
@@ -85,6 +84,23 @@ def view_category(request, category_id):
 
     return render(request, 'tasks/my_category.html', context=context)
 
+@method_decorator(login_required, name='get')
+class TasksByCategoryView(ListView):
+    model = Tasks
+    template_name = "tasks/my_category.html"
+    context_object_name = 'tasks'
+
+    def get_queryset(self):
+        return Tasks.objects.filter(category_id=self.kwargs['category_id'], user_id=self.request.user).select_related('category').order_by('is_done')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_id'] = self.kwargs['category_id']
+        context['form'] = TasksForm()
+        context['cat_form'] = CreateCategoryForm()
+        context['user'] = self.request.user
+        context['username'] = self.request.user.username
+        return context
 @login_required
 def delete_category(request, pk):
     user = request.user.id
@@ -107,6 +123,28 @@ def create_task(request, category_id):
         else:
             errors = form.errors.as_json()
             return JsonResponse({"errors": errors}, status=400)
+
+@method_decorator(login_required, name='get')
+class TaskDetailView(DetailView):
+    model = Tasks
+    template_name = "tasks/tasks_detail.html"
+    context_object_name = 'target_task'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_id'] = self.kwargs['category_id']
+        context['form'] = TasksForm()
+        context['tasks'] = Tasks.objects.filter(category_id=self.kwargs['category_id'], user_id=self.request.user).select_related('category').order_by('is_done')
+        context['cat_form'] = CreateCategoryForm()
+        context['update_form'] = UpdateTaskForm()
+        context['update_content_form'] = UpdateTaskContentForm()
+        context['user'] = self.request.user
+        context['username'] = self.request.user.username
+        context['pk'] = self.kwargs['pk']
+        return context
+
+
+
 
 @login_required
 def detail_task(request, category_id, pk):
