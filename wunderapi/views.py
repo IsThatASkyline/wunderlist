@@ -2,7 +2,7 @@ from tasks.models import Tasks, Category
 from wunderapi.serializers import TaskSerializer, UserSerializer, CategorySerializer
 from rest_framework import permissions, viewsets
 from django.contrib.auth.models import User
-from wunderapi.permissions import IsOwnerOrReadOnly
+from wunderapi.permissions import IsOwner
 from rest_framework.authentication import SessionAuthentication,TokenAuthentication
 from rest_framework.response import Response
 from django.http import Http404
@@ -33,7 +33,7 @@ from rest_framework.views import APIView
 class TaskList(APIView):
 
    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                         IsOwnerOrReadOnly]
+                         IsOwner]
    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
    def get(self, request):
@@ -45,7 +45,7 @@ class TaskList(APIView):
 class TaskDetail(APIView):
 
    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                         IsOwnerOrReadOnly]
+                         IsOwner]
    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
    def get_object(self, pk):
@@ -85,7 +85,7 @@ class TaskDetail(APIView):
 class CategoryList(APIView):
 
    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                         IsOwnerOrReadOnly]
+                         IsOwner]
    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
    def get(self, request):
@@ -104,7 +104,7 @@ class CategoryList(APIView):
 class CategoryDetail(APIView):
 
    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                         IsOwnerOrReadOnly]
+                         IsOwner]
    authentication_classes = [TokenAuthentication, SessionAuthentication]
    serializer = TaskSerializer()
 
