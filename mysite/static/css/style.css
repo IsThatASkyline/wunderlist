@@ -4,7 +4,7 @@ html{
 }
 body{
     height: 100%;
-    min-width: 1330px;
+    min-width: 1782px;
 }
 .col {
     background: url(truebg.jpg) 100% 100%;
@@ -16,7 +16,7 @@ body{
     -o-background-size: cover;
     -webkit-background-size: cover;
     background-size: cover;
-    min-width: 960px;
+    min-width: 200px;
 }
 .card-body {
 
@@ -42,17 +42,16 @@ body{
 }
 .container-fluid {
     height: 93%;
-    min-height: 613px;
+    min-width: 1360px;
     padding-right: 0rem;
     padding-left: 0rem;
-    width: 100%;
 }
 .col-md-3 {
     background: #f3f2f1;
     padding-right: 0;
     padding-left: 0rem;
-    min-width: 240px;
-    max-width: 15%;
+    max-width: 260px;
+
 }
 .list-group-item {
     background: #f3f2f1;
@@ -74,6 +73,7 @@ body{
 }
 .navbar{
     height: 7%;
+    min-width: 1360px;
     min-height: 67px;
 }
 
@@ -106,9 +106,9 @@ a{
     position: relative;
     background: white;
     margin-top: 1rem;
+    margin-left: 1rem;
     height: 90%;
     min-width: 360px;
-    max-width: 20%;
     border: 1px solid #cccccc;
     display: inline-block;
 }
@@ -116,8 +116,8 @@ a{
     padding-left: 0rem;
     padding-bottom: 0rem;
     padding-right: 0rem;
-    min-width: 600px;
-    max-width: 65%;
+    min-width: 715px;
+    max-width: 1300px;
     display: inline-block;
     vertical-align: top;
 }
@@ -287,6 +287,7 @@ textarea:focus{
     text-align: center;
     position: relative;
     background: #f5f5f5;
+    min-height: 700px;
     height: 76%;
 }
 

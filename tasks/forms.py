@@ -18,11 +18,10 @@ class UserLoginForm(AuthenticationForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control no-border', 'placeholder': 'Password'}))
 
 
-class TasksForm(forms.ModelForm):
+class CreateTasksForm(forms.ModelForm):
     class Meta:
         model = Tasks
-        # fields = '__all__'
-        fields = ['title', 'category', 'user']
+        fields = ['title', 'category']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control no-border', 'placeholder': 'Add an item...'})
         }
@@ -54,11 +53,12 @@ class UpdateTaskForm(forms.ModelForm):
 
 
 class UpdateTaskContentForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={'maxlength':'200', 'cols': 20}), label = '')
     class Meta:
         model = Tasks
         fields = ['content']
-        # widgets = {
-        #     'content': forms.Textarea(attrs={'rows': 4, 'cols': 40, 'resize': None}, label = ''),
-        # }
-
+        widgets = {
+            'content': forms.Textarea(attrs={'maxlength':'200', 'cols': 20, 'resize': None}),
+        }
+        labels = {
+            'content': '',
+        }

@@ -1,12 +1,10 @@
 from tasks.models import Tasks, Category
 from wunderapi.serializers import TaskSerializer, UserSerializer, CategorySerializer
 from rest_framework import permissions, viewsets
-from django.contrib.auth.models import User
 from wunderapi.permissions import IsOwner
 from rest_framework.authentication import SessionAuthentication,TokenAuthentication
 from rest_framework.response import Response
-from django.http import Http404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework import status
 
 from rest_framework.views import APIView
@@ -32,47 +30,37 @@ from rest_framework.views import APIView
 
 class TaskList(APIView):
 
-   permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+   permission_classes = [permissions.IsAuthenticated,
                          IsOwner]
    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
+
    def get(self, request):
-      tasks = Tasks.objects.filter(user_id=request.user.id)
+      tasks = get_list_or_404(Tasks, user_id=request.user.id)
       serializer = TaskSerializer(tasks, many=True)
       return Response(serializer.data)
 
 
 class TaskDetail(APIView):
 
-   permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+   permission_classes = [permissions.IsAuthenticated,
                          IsOwner]
    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
-   def get_object(self, pk):
-      try:
-         return Tasks.objects.get(pk=pk)
-      except Tasks.DoesNotExist:
-         raise Http404
-
    def get(self, request, pk):
-      task = self.get_object(pk)
+      task = get_object_or_404(Tasks, pk=pk)
       serializer = TaskSerializer(task)
       return Response(serializer.data)
 
    def delete(self, request, pk):
-       task = self.get_object(pk)
+       task = get_object_or_404(Tasks, pk=pk)
        cat_id = task.category_id
        task.delete()
        return Response(cat_id)
 
    def patch(self, request, pk):
-       try:
-          task = self.get_object(pk)
-       except:
-          raise Http404
-
+       task = get_object_or_404(Tasks, pk=pk)
        data = request.data
-
        task.title = data.get("title", task.title)
        task.is_done = data.get("is_done", task.is_done)
        task.content = data.get("content", task.content)
@@ -84,64 +72,45 @@ class TaskDetail(APIView):
 
 class CategoryList(APIView):
 
-   permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+   permission_classes = [permissions.IsAuthenticated,
                          IsOwner]
    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
    def get(self, request):
-      categories = Category.objects.filter(user_id=request.user.id)
+      categories = get_list_or_404(Category, user_id=request.user.id)
       serializer = CategorySerializer(categories, many=True)
       return Response(serializer.data)
 
    def post(self, request, *args, **kwargs):
-       request.data['user'] = request.user.id
        new_category = CategorySerializer(data=request.data)
        if new_category.is_valid():
-           new_category.save()
+           new_category.save(user=request.user)
        return Response(new_category.data)
 
 
 class CategoryDetail(APIView):
 
-   permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+   permission_classes = [permissions.IsAuthenticated,
                          IsOwner]
    authentication_classes = [TokenAuthentication, SessionAuthentication]
    serializer = TaskSerializer()
 
 
    def get(self, request, pk):
-       category = Category.objects.get(pk=pk)
-       if category.user_id == request.user.id:
-           tasks = Tasks.objects.filter(category_id=pk, user_id=request.user.id)
-           serializer = TaskSerializer(tasks, many=True)
-           return Response(serializer.data)
-       else:
-           raise Http404
+       tasks = get_list_or_404(Tasks, category_id=pk, user_id=request.user.id)
+       serializer = TaskSerializer(tasks, many=True)
+       return Response(serializer.data)
+
 
    def post(self, request, pk, *args, **kwargs):
        user = request.user.id
        task_data = request.data
-       try:
-           content = task_data['content']
-       except:
-           content = None
-       new_task = Tasks.objects.create(title=task_data['title'], category_id=pk, user_id=user, content=content)
+       new_task = Tasks.objects.create(title=task_data['title'], category_id=pk, user_id=user)
        new_task.save()
        serializer = TaskSerializer(new_task)
        return Response(serializer.data)
 
    def delete(self, request, pk):
-       category = Category.objects.get(pk=pk)
+       category = get_object_or_404(Category, pk=pk)
        category.delete()
        return Response(status.HTTP_200_OK)
-
-
-
-#
-# class UserViewSet(viewsets.ReadOnlyModelViewSet):
-#    """
-#    This viewset automatically provides `list` and `retrieve` actions.
-#    """
-#    queryset = User.objects.all()
-#    serializer_class = UserSerializer
-#    authentication_classes = [TokenAuthentication]

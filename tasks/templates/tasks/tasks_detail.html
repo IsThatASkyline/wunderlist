@@ -170,9 +170,8 @@
         </form>
     </div>
     <div class="delete_task">
-    <form action="{% url 'delete_task' target_task.pk %}" method="post">
+    <form action="{% url 'delete_task' target_task.pk %}" method="delete">
         {% csrf_token %}
-        <input type="hidden"  name="category_id" value="{{ category_id }}">
         <button type="submit" class="btn btn-danger mb-3">DELETE</button>
     </form>
     </div>

@@ -12,10 +12,11 @@ class Tasks(models.Model):
     is_done = models.BooleanField(default=False, verbose_name='Is done')
     category = models.ForeignKey('Category', verbose_name="Category", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="tasks", on_delete=models.CASCADE, default=1)
-    content = models.TextField(max_length=300, verbose_name="Content", null=True, blank=True)
+    content = models.CharField(max_length=300, verbose_name="Content", blank=True)
 
     def get_absolute_url(self):
-        return reverse_lazy('view_tasks', kwargs={"pk": self.pk})
+        return reverse_lazy('view_tasks', kwargs={"category_id": self.category.id, "pk": self.pk})
+
 
 
     def __str__(self):
@@ -29,6 +30,7 @@ class Tasks(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name="Название категории")
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=2)
+
     def get_absolute_url(self):
         return reverse_lazy('category', kwargs={"category_id": self.id})
 
