@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .tasks import send_auth_mail
 
 def start(request):
     return redirect('login')
@@ -26,6 +27,7 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            send_auth_mail.delay(form.instance.email)
             new_category = Category.objects.create(title='Incoming', user=User.objects.get(pk=user.id))
             new_category.save()
             new_task = Tasks.objects.create(title='Enjoy!', category=Category.objects.get(pk=new_category.id), user=User.objects.get(pk=user.id))
