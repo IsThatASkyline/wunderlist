@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Tasks(models.Model):
 
+
+class Tasks(models.Model):
     title = models.CharField(max_length=100, verbose_name="To-Do")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
@@ -17,8 +18,6 @@ class Tasks(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('view_tasks', kwargs={"category_id": self.category.id, "pk": self.pk})
 
-
-
     def __str__(self):
         return self.title
 
@@ -26,6 +25,7 @@ class Tasks(models.Model):
         verbose_name = 'Task'
         verbose_name_plural = 'Tasks'
         ordering = ['-created_at']
+
 
 class Category(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name="Название категории")

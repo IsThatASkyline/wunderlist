@@ -56,8 +56,6 @@
     <div class="delete-category">
         <form action="{% url 'delete_category' category_id %}" method="post">
             {% csrf_token %}
-            <input type="hidden"  name="first_category" value="{{ first_category }}">
-            <input type="hidden"  name="second_category" value="{{ second_category }}">
             <button type="submit" class="btn no-border">
                 <img src="../../static/css/pomoika.jpg" width="40" height="25">
             </button>

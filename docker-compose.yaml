@@ -13,8 +13,7 @@ services:
       - redis
 
   celery:
-    build:
-      context: .
+    build: .
     command: celery -A mysite worker -l info
     volumes:
       - .:/usr/src/app

@@ -13,6 +13,7 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
+
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control no-border', 'placeholder': 'Username'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control no-border', 'placeholder': 'Password'}))
@@ -26,6 +27,7 @@ class CreateTasksForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control no-border', 'placeholder': 'Add an item...'})
         }
 
+
 class CreateTaskForm(forms.ModelForm):
     class Meta:
         model = Tasks
@@ -34,14 +36,15 @@ class CreateTaskForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control no-border', 'placeholder': 'Add an item...'})
         }
 
+
 class CreateCategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['title', 'user']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'create-category', 'placeholder': 'Add category...', 'id': 'create_category'}),
-
         }
+
 
 class UpdateTaskForm(forms.ModelForm):
     class Meta:
