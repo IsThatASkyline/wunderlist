@@ -19,35 +19,34 @@
         <form id="create_category" name="create_category" action="" method="post">
             {% csrf_token %}
             {{cat_form.title}}
-            <input type="hidden"  name="user" value="{{ user_id }}">
         </form>
         <script>
-                       $('#create_category').submit(function(e) {
-                            e.preventDefault();
+           $('#create_category').submit(function(e) {
+                e.preventDefault();
 
-                            console.log("СКРИПТ ДЛЯ ИНПУТ 2");
-                             $.ajax({
-                             data: $(this).serialize(),
-                              type: 'POST',
-                              url: "{% url 'create_category'%}",
-                              success: function (json) {
-                                document.getElementById("create_category").reset();
-                                $("#sidebar").append(
-                                    '<a href="/'+json.new_cat_id+'/" class="list-group-item list-group-item-action">' +
-                                            json.title + '<span class="badge bg-primary rounded-pill">0</span>' +
-                                        '</a>'
-                                )
-                                },
+                console.log("СКРИПТ ДЛЯ ИНПУТ 2");
+                 $.ajax({
+                 data: $(this).serialize(),
+                  type: 'POST',
+                  url: "{% url 'create_category'%}",
+                  success: function (json) {
+                    document.getElementById("create_category").reset();
+                    $("#sidebar").append(
+                        '<a href="/category/'+json.new_cat_id+'/" class="list-group-item list-group-item-action">' +
+                                json.title + '<span class="badge bg-primary rounded-pill">0</span>' +
+                            '</a>'
+                    )
+                    },
 
 
-                              error: function (response) {
+                  error: function (response) {
 
-                                  alert(response.responseJSON.errors);
-                                  console.log(response.responseJSON.errors)
-                              }
-                          });
-                          return false;
-                  })
+                      alert(response.responseJSON.errors);
+                      console.log(response.responseJSON.errors)
+                  }
+              });
+              return false;
+      })
 
      </script>
     </div>

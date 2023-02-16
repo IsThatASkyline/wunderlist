@@ -1,7 +1,9 @@
 from .models import Tasks, Category
-from .forms import CreateTasksForm, UserRegisterForm, UserLoginForm, CreateCategoryForm, UpdateTaskForm, UpdateTaskContentForm
+from .forms import CreateCategoryForm
 from django.contrib.auth.models import User
 from .tasks import send_auth_mail
+
+
 
 def service_checkbox(task_id, is_done):
     task = Tasks.objects.get(pk=task_id)
@@ -14,8 +16,10 @@ def service_checkbox(task_id, is_done):
     task.save()
     return title, category_id
 
+
 def service_delete_catagory(pk):
     return Category.objects.get(pk=pk).delete()
+
 
 def service_delete_task(pk):
     task = Tasks.objects.get(pk=pk)
@@ -23,11 +27,13 @@ def service_delete_task(pk):
     task.delete()
     return category_id
 
+
 def service_update_task_content(pk, new_content):
     task = Tasks.objects.get(pk=pk)
     task.content = new_content
     task.save()
     return task.category_id
+
 
 def service_update_task_title(pk, new_title):
     task = Tasks.objects.get(pk=pk)
@@ -35,16 +41,6 @@ def service_update_task_title(pk, new_title):
     task.save()
     return new_title
 
-def service_create_category(request_form):
-        form = CreateCategoryForm(request_form)
-        if form.is_valid():
-            cat = form.save()
-            title = cat.title
-            new_cat_id = cat.id
-            return title, new_cat_id
-        else:
-            errors = form.errors.as_json()
-            raise ValueError
 
 def service_register_user(form):
     user = form.save()

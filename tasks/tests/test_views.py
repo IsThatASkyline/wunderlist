@@ -32,7 +32,7 @@ class TestViews(TestCase):
         self.client.force_login(User.objects.get_or_create(username='testuser1')[0])
         response = self.client.post(url, {'content': 'newcontent',
                                     'task_id': self.user1_task.pk})
-        self.assertRedirects(response, '/1/1/details', status_code=302, target_status_code=200)
+        self.assertRedirects(response, '/category/1/task/1/details', status_code=302, target_status_code=200)
 
     def test_delete_task_POST(self):
         url = reverse('delete_task', kwargs={'pk': self.user1_task.pk})
@@ -55,14 +55,14 @@ class TestViews(TestCase):
         url = reverse('category', kwargs={"category_id": self.user1_category.id})
         na_response = self.client.get(url)
 
-        self.assertRedirects(na_response, f'/accounts/login/?next=/{self.user1_category.id}/', target_status_code=404)
+        self.assertRedirects(na_response, f'/accounts/login/?next=/category/{self.user1_category.id}/', target_status_code=404)
 
 
     def test_task_NA_GET(self):
         url = reverse('view_tasks', kwargs={"category_id": self.user1_category.id, "pk": self.user1_task.pk})
         na_response = self.client.get(url)
 
-        self.assertRedirects(na_response, f'/accounts/login/?next=/{self.user1_category.id}/{self.user1_task.pk}/details', target_status_code=404)
+        self.assertRedirects(na_response, f'/accounts/login/?next=/category/{self.user1_category.id}/task/{self.user1_task.pk}/details', target_status_code=404)
 
     def test_update_task_content_NA_POST(self):
 

@@ -5,15 +5,11 @@ from tasks.forms import CreateCategoryForm
 
 register = template.Library()
 
-@register.simple_tag()
-def get_categories():
-    return Category.objects.all()
-
 @register.inclusion_tag('tasks/list_categories.html', takes_context=True )
 def show_categories(context):
     request = context['request']
     try:
-        category_id = int(str(request.path).split('/')[1])
+        category_id = context['category_id']
     except:
         category_id = None
     user_id = request.user.id

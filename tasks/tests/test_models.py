@@ -11,7 +11,7 @@ class TasksModelTest(TestCase):
     def test_get_absolute_url(self):
         task = Tasks.objects.get(pk=1)
 
-        self.assertEquals(task.get_absolute_url(), '/1/1/details')
+        self.assertEquals(task.get_absolute_url(), '/category/1/task/1/details')
 
     def test_title_length(self):
         task = Tasks.objects.get(pk=1)
@@ -29,7 +29,7 @@ class CategoryModelTest(TestCase):
     def test_get_absolute_url(self):
         category = Category.objects.get(pk=1)
 
-        self.assertEquals(category.get_absolute_url(), '/1/')
+        self.assertEquals(category.get_absolute_url(), '/category/1/')
 
     def test_delete_category(self):
         category = Category.objects.get(pk=1)

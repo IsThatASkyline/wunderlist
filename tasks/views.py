@@ -1,16 +1,13 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
-from .forms import CreateTasksForm, UserRegisterForm, UserLoginForm, CreateCategoryForm, UpdateTaskForm, UpdateTaskContentForm
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .models import Tasks, Category, User
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
-from django.contrib import messages
-from django.http import JsonResponse
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .services import *
 from .utils import *
+from .forms import UserRegisterForm, UserLoginForm
 
 
 def start(request):
@@ -52,15 +49,13 @@ def user_login(request):
 
 @login_required
 def home(request):
-    username = request.user.username
-    return render(request, 'tasks/home.html', context={'username': username})
+    return render(request, 'tasks/home.html', context={'username': request.user.username})
 
 
-@login_required
-def create_category(request):
-    if request.method == "POST" and is_ajax(request=request):
-        title, category_id = service_create_category(request.POST)
-        return JsonResponse({"title": title, "new_cat_id": category_id}, status=200)
+@method_decorator(login_required, name='post')
+class CreateCategoryView(LoginRequiredMixin, CreateCategoryMixin, CreateView):
+    model = Category
+    fields = ['title']
 
 
 @method_decorator(login_required, name='get')

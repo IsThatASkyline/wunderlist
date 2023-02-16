@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load static %} <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
 {% block title %}
   {{ task_title }}
 {% endblock %}
@@ -21,44 +19,39 @@
     <div class="control-group">
         {{ form.title }}
     </div>
-
-    <div class="form-group">
-    <input type="hidden" id="category" name="category" value="{{ category_id }}">
-    <input type="hidden" id="user" name="user" value="{{ user }}">
-    </div>
     </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-              let task_form = document.getElementById('myForm');
-                   $(task_form).submit(function(e) {
-                        console.log("СКРИПТ ДЛЯ ИНПУТ 1")
-                        $.ajax({
-                          data: $(this).serialize(),
-                          type: $(this).attr('method'),
-                          url: "{% url 'create_task' category_id %}",
-                          success: function (json) {
-                            document.getElementById("myForm").reset();
-                            $("#tasks").prepend(
-                             '<a class="a_'+json.new_task_id+'" href="/'+json.category_id+'/'+json.new_task_id+'/details">' +
-                                '<div class="card-body rounded text">' +
-                                   '<div class="form-check">' +
-                                      '<input class="form-check-input" type="checkbox" name="'+json.new_task_id+'">' +
-                                       json.title +
-                                    '</div>' +
-                                '</div>' +
-                             '</a>'
-                            )
-                            },
+      let task_form = document.getElementById('myForm');
+           $(task_form).submit(function(e) {
+                console.log("СКРИПТ ДЛЯ ИНПУТ 1")
+                $.ajax({
+                  data: $(this).serialize(),
+                  type: $(this).attr('method'),
+                  url: "{% url 'create_task' category_id %}",
+                  success: function (json) {
+                    document.getElementById("myForm").reset();
+                    $("#tasks").prepend(
+                     '<a class="a_'+json.new_task_id+'" href="/category/'+json.category_id+'/tasks/'+json.new_task_id+'/details">' +
+                        '<div class="card-body rounded text">' +
+                           '<div class="form-check">' +
+                              '<input class="form-check-input" type="checkbox" name="'+json.new_task_id+'">' +
+                               json.title +
+                            '</div>' +
+                        '</div>' +
+                     '</a>'
+                    )
+                    },
 
 
-                          error: function (response) {
+                  error: function (response) {
 
-                              alert(response.responseJSON.errors);
-                              console.log(response.responseJSON.errors)
-                          }
-                      });
-                      return false;
-              })
+                      alert(response.responseJSON.errors);
+                      console.log(response.responseJSON.errors)
+                  }
+              });
+              return false;
+      })
           </script>
     <div id="tasks">
     {% for item in tasks %}
