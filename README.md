@@ -1,5 +1,5 @@
 # Wunderlist
-https://wunderlistapp.herokuapp.com
+https://wunderlist-production-0795.up.railway.app
 
 ## To-Do приложение
 ### Авторизация
