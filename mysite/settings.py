@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.0', 'wunderlist-production-0795.up.railway.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
