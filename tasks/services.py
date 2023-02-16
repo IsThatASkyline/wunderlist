@@ -45,7 +45,7 @@ def service_update_task_title(pk, new_title):
 def service_register_user(form):
     user = form.save()
     category_id = service_create_data_for_new_user(user)
-    # send_auth_mail.delay(form.instance.email) Redis must be running
+    send_auth_mail.delay(form.instance.email) # Redis must be running
     return user, category_id
 
 
